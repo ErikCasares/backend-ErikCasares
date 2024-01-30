@@ -1,55 +1,3 @@
-// const products = [];
-//const product ={}; 
-//class ProductManager {
-//
-//    constructor (){
-//        this.name =""
-//    }
-//
-//}
-//
-//    function addPoducts(title, description, price, thumbnail, code, stock){
-//
-//
-//
-//        const product = {
-//            id: generarId(),
-//            title: title,
-//            description: description,
-//            price: price,
-//            thumbnail: thumbnail,
-//            code: code,
-//            stock: stock
-//            
-//        }
-//
-//        products.push(product)
-//        function getProducts(){
-//            console.log("-------nueva lista-------",products)
-//        }
-//        getProducts()
-//    }
-//    function generarId(){
-//        
-//
-//
-//            return id=products.length+1    
-//            console.log("2")
-//        
-//    }
-//
-//
-//function getProducts(){
-//    console.log("-------nueva lista-------",products)
-//}
-//addPoducts("papa", "una simple papa", 10,"foto de una papa", "011000110", 7);
-//
-//addPoducts("cebolla", "es como un ogro, pero es una cebolla", 5, "foto de un ogro con una cebolla", "01001110110", 5)
-//
-//addPoducts("piedra", "buena herramienta primogenita de todo hombre", 1, "foto de hombre tirando piedra", "0111101100110", 100) //
-//
-
-
 class Product {
     constructor(title, description, price, thumbnail, code, stock) {
         this.title = title;
@@ -117,5 +65,7 @@ manager.addProduct("Producto 8", "Descripción 2", 29, "img8.jpg", "P008", 30);
 manager.addProduct("Producto 9", "Descripción 3", 39, "img9.jpg", "P009", 20); 
 console.log("lista actualizada", manager.products)
 
-const productIdToSearch = 7;
-const foundProduct = manager.getProductById(productIdToSearch);
+var productIdToSearch = 7;
+var foundProduct = manager.getProductById(productIdToSearch);
+productIdToSearch = 20;
+foundProduct = manager.getProductById(productIdToSearch);
