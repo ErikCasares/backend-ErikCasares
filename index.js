@@ -1,3 +1,9 @@
+import fs from 'fs'
+import { Blob } from 'buffer'
+import { stringify } from 'querystring';
+const INFO = "./package.json"
+
+
 class Product {
     constructor(title, description, price, thumbnail, code, stock) {
         this.title = title;
@@ -6,14 +12,21 @@ class Product {
         this.thumbnail = thumbnail;
         this.code = code;
         this.stock = stock;
+
+    }
+        getInfo() {
+            return `ID: ${this.id}, Código: ${this.code}, Nombre: ${this.title}`;
     }
 }
 
 class ProductManager {
+
     constructor() {
         this.products = [];
         this.idCounter = this.products.length+1;
+        this.PATH = "./products.json"
     }
+
 
     addProduct(title, description, price, thumbnail, code, stock) {
         // Validar que todos los campos sean obligatorios
@@ -26,15 +39,39 @@ class ProductManager {
             return;
         }
 
-
+        // ID autoincrementable
         const newProduct = new Product(title, description, price, thumbnail, code, stock);
         newProduct.id = this.idCounter;
         this.idCounter++;
-
+        //Agregar producto al arreglo
         this.products.push(newProduct);
         console.log(`Producto agregado: ${newProduct.title} (ID: ${newProduct.id})`)
+
     }
 
+    updateProduct(id, updatedFields) {
+        const productIndex = this.products.findIndex(product => product.id === id);
+        if (productIndex !== -1) {
+            // Actualizar solo los campos proporcionados en updatedFields
+            this.products[productIndex] = { ...this.products[productIndex], ...updatedFields };
+            const productoactualizado = this.products[productIndex]
+            console.log(`Producto actualizado: { ID: ${productoactualizado.id}, Código: ${productoactualizado.code}, Nombre: ${productoactualizado.title} }`);
+
+        } else {
+            console.log(`No se encontró ningún producto con el ID ${id}.`);
+        }
+    }
+
+    deleteProduct(id) {
+        const productIndex = this.products.findIndex(product => product.id === id);
+
+        if (productIndex !== -1) {
+            const deletedProduct = this.products.splice(productIndex, 1)[0];
+            console.log(`Producto eliminado: { ID: ${deletedProduct.id}, Código: ${deletedProduct.code}, Nombre: ${deletedProduct.title} }`);
+        } else {
+            console.log(`No se encontró ningún producto con el ID ${id}.`);
+        }
+    }
         // Buscar el producto por ID
 
     getProductById(id) {
@@ -48,6 +85,20 @@ class ProductManager {
         }
 
         return product;
+    }
+
+    saveProductsToFile(PATH) {
+        return new Promise((resolve, reject) => {
+            const productsJSON = JSON.stringify(this.products, null, 2);
+
+            fs.writeFile(PATH, productsJSON, 'utf8', (err) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(`Productos guardados en ${PATH}`);
+                }
+            });
+        });
     }
 }
 
@@ -67,5 +118,27 @@ console.log("lista actualizada", manager.products)
 
 var productIdToSearch = 7;
 var foundProduct = manager.getProductById(productIdToSearch);
+
 productIdToSearch = 20;
 foundProduct = manager.getProductById(productIdToSearch);
+
+// Modificar un producto por ID
+var productToModify = 2
+manager.updateProduct(productToModify, { price: 39.99, stock: 40 });
+
+// Eliminar un producto por ID
+manager.deleteProduct(1);
+console.log("lista actualizada", manager.products)
+
+manager.saveProductsToFile('productos.json')
+    .then((message) => {
+        console.log(message);
+    })
+    .catch((error) => {
+        console.error('Error al guardar los productos:', error);
+    });
+
+//const productsJSON = JSON.stringify(manager.products, null, 2);
+//console.log(productsJSON);
+//        fs.promises.writeFile(PATH, productsJSON, 'utf-8')
+//        console.log("hola")
