@@ -70,5 +70,23 @@
     "code": "P009",
     "stock": 20,
     "id": 9
+  },
+  {
+    "title": "Producto 10",
+    "description": "Descripción 3",
+    "price": 29,
+    "thumbnail": "img10.jpg",
+    "code": "P010",
+    "stock": 39,
+    "id": 10
+  },
+  {
+    "title": "Producto 11",
+    "description": "agregado despues del json",
+    "price": 29,
+    "thumbnail": "img10.jpg",
+    "code": "P011",
+    "stock": 39,
+    "id": 11
   }
 ]
