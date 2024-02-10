@@ -52,9 +52,9 @@ class ProductManager {
                 return this.products;
             }
         } catch (error) {
-            // Log any errors that occur during file read/write
+            // mostando posibles errores
             console.error('Error al cargar o inicializar productos:', error);
-            throw error; // Optionally, you can choose to throw the error here to indicate failure.
+            throw error;
         }
     }
 
