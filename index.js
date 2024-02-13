@@ -7,7 +7,7 @@ import {
 } from 'querystring';
 import path from 'path';
 const INFO = "./package.json"
-
+const PATH = "./products.json"
 
 class Product {
     constructor(title, description, price, thumbnail, code, stock) {
@@ -29,7 +29,7 @@ class ProductManager {
     constructor() {
         this.products = [];
         this.idCounter = this.products.length + 1;
-        this.PATH = "./products.json"
+        this.PATH = PATH
     }
     getProduct() {
         try {
