@@ -7,6 +7,7 @@ import {
 } from 'querystring';
 import path from 'path';
 const INFO = "./package.json"
+const PATH = "./src/products.json"
 
 
 class Product {
@@ -24,12 +25,12 @@ class Product {
     }
 }
 
-class ProductManager {
+export class ProductManager {
 
     constructor() {
         this.products = [];
-        this.idCounter = this.products.length + 1;
-        this.PATH = "./products.json"
+        this.idCounter =  1
+        this.PATH = PATH
     }
     getProduct() {
         try {
@@ -40,8 +41,13 @@ class ProductManager {
     
                 // Parsea el contenido a un objeto javascript
                 this.products = JSON.parse(data);
-    
+                console.log(this.PATH)
                 console.log('Productos cargados:', this.products);
+
+                // Establece idCounter en el valor más alto existente + 1
+                this.idCounter = this.products.reduce((maxId, product) => {
+                    return Math.max(maxId, product.id);
+                }, 0) + 1;
     
                 return this.products;
             } else {
@@ -109,14 +115,17 @@ class ProductManager {
     }
     // Buscar el producto por ID
 
-    getProductById(id) {
+    getProductById(productId) {
 
-        const product = this.products.find(p => p.id === id);
+        const id = productId
+        console.log(id)
+        console.log(this.products)
+        const product = this.products.find(p => p.id == id);
         if (product) {
             ;
-            console.log(`Producto encontrado: { ID: ${product.id}, Código: ${product.code}, Nombre: ${product.title} }`);
+            console.log(`Producto encontrado:`);
         } else {
-            console.log(`No se encontró ningún producto con el ID ${id}.`);
+            console.log(`No se encontró ningún producto con el ID.`);
         }
 
         return product;
@@ -137,78 +146,85 @@ class ProductManager {
     }
 }
 
-//Uso
+// // Uso
 const manager = new ProductManager();
-
 manager.getProduct();
-//agregando muchos productos sin repetir
+// //agregando muchos productos sin repetir
 
-manager.addProduct("papa", "una simple papa", 10, "foto-de-una-papa,jpg", "P001", 7);
-manager.addProduct("cebolla", "es como un ogro, pero es una cebolla", 5, "foto-de-un-ogro-con-una-cebolla.jpg", "P002", 5);
-manager.addProduct("piedra", "buena herramienta primogenita de todo hombre", 1, "foto-de-hombre-tirando-piedra.jpg", "P003", 100);
-manager.addProduct("escoba", "escoba nueva barre bien", 5, "foto-de-nimbus2000.jpg", "P004", 50);
-manager.addProduct("Producto 5", "Descripción 2", 12, "img5.jpg", "P005", 30);
-manager.addProduct("Producto 6", "Descripción 3", 30, "img6.jpg", "P006", 20);
-manager.addProduct("Producto 7", "Descripción 1", 19, "img7.jpg", "P007", 50);
-manager.addProduct("Producto 8", "Descripción 2", 29, "img8.jpg", "P008", 30);
-manager.addProduct("Producto 9", "Descripción 3", 39, "img9.jpg", "P009", 20);
+// manager.addProduct("papa", "una simple papa", 10, "foto-de-una-papa,jpg", "P001", 7);
+// manager.addProduct("cebolla", "es como un ogro, pero es una cebolla", 5, "foto-de-un-ogro-con-una-cebolla.jpg", "P002", 5);
+// manager.addProduct("piedra", "buena herramienta primogenita de todo hombre", 1, "foto-de-hombre-tirando-piedra.jpg", "P003", 100);
+// manager.addProduct("escoba", "escoba nueva barre bien", 5, "foto-de-nimbus2000.jpg", "P004", 50);
+// manager.addProduct("Producto 5", "Descripción 2", 12, "img5.jpg", "P005", 30);
+// manager.addProduct("Producto 6", "Descripción 3", 30, "img6.jpg", "P006", 20);
+// manager.addProduct("Producto 7", "Descripción 1", 19, "img7.jpg", "P007", 50);
+// manager.addProduct("Producto 8", "Descripción 2", 29, "img8.jpg", "P008", 30);
+// manager.addProduct("Producto 9", "Descripción 3", 39, "img9.jpg", "P009", 20);
 
-//producto repitiendo codigo
+// //producto repitiendo codigo
 
-manager.addProduct("Producto 10", "item con error", 12, "img9.jpg", "P005", 20);
+// manager.addProduct("Producto 10", "item con error", 12, "img9.jpg", "P005", 20);
 
-//mostrar lista completa
+// //mostrar lista completa
 
-console.log("lista actualizada", manager.products)
+// console.log("lista actualizada", manager.products)
 
-//buscando producto, acierto- error
+// //buscando producto, acierto- error
 
-var productIdToSearch = 7;
-var foundProduct = manager.getProductById(productIdToSearch);
+// var productIdToSearch = 7;
+// var foundProduct = manager.getProductById(productIdToSearch);
 
-productIdToSearch = 20;
-foundProduct = manager.getProductById(productIdToSearch);
+// productIdToSearch = 20;
+// foundProduct = manager.getProductById(productIdToSearch);
 
-// Modificar un producto por ID
-var productToModify = 2
-manager.updateProduct(productToModify, {
-    price: 39.99,
-    stock: 40
-});
+// // Modificar un producto por ID
+// var productToModify = 2
+// manager.updateProduct(productToModify, {
+//     price: 24,
+//     stock: 24
+// });
 
-// Eliminar un producto por ID
-manager.deleteProduct(1);
+// //Eliminar un producto por ID
+// manager.deleteProduct(5);
+// manager.deleteProduct(10);
+// manager.deleteProduct(6);
+// manager.deleteProduct(7);
 
-//mostrar la lista despues de aplicar los cambios 
+// //mostrar la lista despues de aplicar los cambios 
 
-console.log("lista actualizada", manager.products)
+// console.log("lista actualizada", manager.products)
 
-// agregando un item extra
+// // agregando un item extra
 
-manager.addProduct("Producto 10", "Descripción 3", 29, "img10.jpg", "P010", 39);
+// manager.addProduct("Producto 10", "Descripción 3", 29, "img10.jpg", "P010", 39);
 
-// actualizando un json de items
+// // actualizando un json de items
 
-manager.saveProductsToFile()
-    .then((message) => {
-        console.log(message);
-    })
-    .catch((error) => {
-        console.error('Error al guardar los productos:', error);
-    });
+// manager.saveProductsToFile()
+//     .then((message) => {
+//         console.log(message);
+//     })
+//     .catch((error) => {
+//         console.error('Error al guardar los productos:', error);
+//     });
 
-//leyendo productos desde el json 
-manager.getProduct()
+// //leyendo productos desde el json 
+// manager.getProduct()
 
-//agregando despues del json
+// //agregando despues del json
 
-manager.addProduct("Producto 11", "agregado despues del json", 29, "img10.jpg", "P011", 39);
+// manager.addProduct("Producto 11", "agregado despues del json", 29, "img10.jpg", "P030", 39);
+// manager.addProduct("Producto 11", "agregado despues del json", 29, "img10.jpg", "P031", 39);
+// manager.addProduct("Producto 11", "agregado despues del json", 29, "img10.jpg", "P032", 39);
 
-//volviendo a guardar el json
-manager.saveProductsToFile()
-    .then((message) => {
-        console.log(message);
-    })
-    .catch((error) => {
-        console.error('Error al guardar los productos:', error);
-    });
+// //volviendo a guardar el json
+// manager.saveProductsToFile()
+//     .then((message) => {
+//         console.log(message);
+//     })
+//     .catch((error) => {
+//         console.error('Error al guardar los productos:', error);
+//     });
+
+
+    

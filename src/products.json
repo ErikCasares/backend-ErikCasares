@@ -1,0 +1,92 @@
+[
+  {
+    "title": "papa",
+    "description": "una simple papa",
+    "price": 10,
+    "thumbnail": "foto-de-una-papa,jpg",
+    "code": "P001",
+    "stock": 7,
+    "id": 1
+  },
+  {
+    "title": "cebolla",
+    "description": "es como un ogro, pero es una cebolla",
+    "price": 24,
+    "thumbnail": "foto-de-un-ogro-con-una-cebolla.jpg",
+    "code": "P002",
+    "stock": 24,
+    "id": 2
+  },
+  {
+    "title": "piedra",
+    "description": "buena herramienta primogenita de todo hombre",
+    "price": 1,
+    "thumbnail": "foto-de-hombre-tirando-piedra.jpg",
+    "code": "P003",
+    "stock": 100,
+    "id": 3
+  },
+  {
+    "title": "escoba",
+    "description": "escoba nueva barre bien",
+    "price": 5,
+    "thumbnail": "foto-de-nimbus2000.jpg",
+    "code": "P004",
+    "stock": 50,
+    "id": 4
+  },
+  {
+    "title": "Producto 5",
+    "description": "Descripción 2",
+    "price": 12,
+    "thumbnail": "img5.jpg",
+    "code": "P005",
+    "stock": 30,
+    "id": 5
+  },
+  {
+    "title": "Producto 6",
+    "description": "Descripción 3",
+    "price": 30,
+    "thumbnail": "img6.jpg",
+    "code": "P006",
+    "stock": 20,
+    "id": 6
+  },
+  {
+    "title": "Producto 7",
+    "description": "Descripción 1",
+    "price": 19,
+    "thumbnail": "img7.jpg",
+    "code": "P007",
+    "stock": 50,
+    "id": 7
+  },
+  {
+    "title": "Producto 8",
+    "description": "Descripción 2",
+    "price": 29,
+    "thumbnail": "img8.jpg",
+    "code": "P008",
+    "stock": 30,
+    "id": 8
+  },
+  {
+    "title": "Producto 9",
+    "description": "Descripción 3",
+    "price": 39,
+    "thumbnail": "img9.jpg",
+    "code": "P009",
+    "stock": 20,
+    "id": 9
+  },
+  {
+    "title": "Producto 11",
+    "description": "agregado despues del json",
+    "price": 29,
+    "thumbnail": "img10.jpg",
+    "code": "P015",
+    "stock": 39,
+    "id": 10
+  }
+]
