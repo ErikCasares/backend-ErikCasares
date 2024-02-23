@@ -11,10 +11,10 @@
   {
     "title": "cebolla",
     "description": "es como un ogro, pero es una cebolla",
-    "price": 24,
+    "price": 5,
     "thumbnail": "foto-de-un-ogro-con-una-cebolla.jpg",
     "code": "P002",
-    "stock": 24,
+    "stock": 5,
     "id": 2
   },
   {
@@ -79,14 +79,5 @@
     "code": "P009",
     "stock": 20,
     "id": 9
-  },
-  {
-    "title": "Producto 11",
-    "description": "agregado despues del json",
-    "price": 29,
-    "thumbnail": "img10.jpg",
-    "code": "P015",
-    "stock": 39,
-    "id": 10
   }
 ]

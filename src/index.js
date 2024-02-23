@@ -1,13 +1,6 @@
 import fs from 'fs'
-import {
-    Blob
-} from 'buffer'
-import {
-    stringify
-} from 'querystring';
 import path from 'path';
-const INFO = "./package.json"
-const PATH = "./src/products.json"
+const PATH = "./products.json"
 
 
 class Product {
@@ -72,7 +65,7 @@ export class ProductManager {
         }
         if (this.products.some(product => product.code === code)) {
             console.log(`Ya existe un producto con el código ${code}.`);
-            return;
+            return res.json(`Ya existe un producto con el código ${code}.`);
         }
 
         // ID autoincrementable
@@ -80,7 +73,7 @@ export class ProductManager {
         newProduct.id = this.idCounter++;
         //Agregar producto al arreglo
         this.products.push(newProduct);
-        this.saveProductsToFile()
+        this.saveProductsToFile(this.products)
         console.log(`Producto agregado: ${newProduct.title} (ID: ${newProduct.id})`)
 
     }
@@ -131,9 +124,10 @@ export class ProductManager {
         return product;
     }
 
-    saveProductsToFile() {
+    saveProductsToFile(products) {
         return new Promise((resolve, reject) => {
-            const productsJSON = JSON.stringify(this.products, null, 2);
+            console.log(products)
+            const productsJSON = JSON.stringify(products, null, 2);
 
             fs.writeFileSync(this.PATH, productsJSON, 'utf8', (err) => {
                 if (err) {
@@ -150,18 +144,18 @@ export class ProductManager {
 const manager = new ProductManager();
 manager.getProduct();
 // //agregando muchos productos sin repetir
-
-// manager.addProduct("papa", "una simple papa", 10, "foto-de-una-papa,jpg", "P001", 7);
-// manager.addProduct("cebolla", "es como un ogro, pero es una cebolla", 5, "foto-de-un-ogro-con-una-cebolla.jpg", "P002", 5);
-// manager.addProduct("piedra", "buena herramienta primogenita de todo hombre", 1, "foto-de-hombre-tirando-piedra.jpg", "P003", 100);
-// manager.addProduct("escoba", "escoba nueva barre bien", 5, "foto-de-nimbus2000.jpg", "P004", 50);
-// manager.addProduct("Producto 5", "Descripción 2", 12, "img5.jpg", "P005", 30);
-// manager.addProduct("Producto 6", "Descripción 3", 30, "img6.jpg", "P006", 20);
-// manager.addProduct("Producto 7", "Descripción 1", 19, "img7.jpg", "P007", 50);
-// manager.addProduct("Producto 8", "Descripción 2", 29, "img8.jpg", "P008", 30);
-// manager.addProduct("Producto 9", "Descripción 3", 39, "img9.jpg", "P009", 20);
-
-// //producto repitiendo codigo
+// 
+//  manager.addProduct("papa", "una simple papa", 10, "foto-de-una-papa,jpg", "P001", 7);
+//  manager.addProduct("cebolla", "es como un ogro, pero es una cebolla", 5, "foto-de-un-ogro-con-una-cebolla.jpg", "P002", 5);
+//  manager.addProduct("piedra", "buena herramienta primogenita de todo hombre", 1, "foto-de-hombre-tirando-piedra.jpg", "P003", 100);
+//  manager.addProduct("escoba", "escoba nueva barre bien", 5, "foto-de-nimbus2000.jpg", "P004", 50);
+//  manager.addProduct("Producto 5", "Descripción 2", 12, "img5.jpg", "P005", 30);
+//  manager.addProduct("Producto 6", "Descripción 3", 30, "img6.jpg", "P006", 20);
+//  manager.addProduct("Producto 7", "Descripción 1", 19, "img7.jpg", "P007", 50);
+//  manager.addProduct("Producto 8", "Descripción 2", 29, "img8.jpg", "P008", 30);
+//  manager.addProduct("Producto 9", "Descripción 3", 39, "img9.jpg", "P009", 20);
+// 
+//producto repitiendo codigo
 
 // manager.addProduct("Producto 10", "item con error", 12, "img9.jpg", "P005", 20);
 
@@ -227,4 +221,3 @@ manager.getProduct();
 //     });
 
 
-    
